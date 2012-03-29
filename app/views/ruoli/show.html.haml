@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Nome:
+  = @ruolo.nome
+
+= link_to 'Edit', edit_ruolo_path(@ruolo)
+\|
+= link_to 'Back', ruoli_path

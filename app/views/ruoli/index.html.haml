@@ -1,0 +1,19 @@
+%h1 Listing ruoli
+
+%table
+  %tr
+    %th Nome
+    %th
+    %th
+    %th
+
+  - @ruoli.each do |ruolo|
+    %tr
+      %td= ruolo.nome
+      %td= link_to 'Show', ruolo
+      %td= link_to 'Edit', edit_ruolo_path(ruolo)
+      %td= link_to 'Destroy', ruolo, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Ruolo', new_ruolo_path

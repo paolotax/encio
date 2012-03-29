@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Importo:
+  = @pagamento.importo
+%p
+  %b Dipendente:
+  = @pagamento.dipendente_id
+%p
+  %b Serata:
+  = @pagamento.serata_id
+
+= link_to 'Edit', edit_pagamento_path(@pagamento)
+\|
+= link_to 'Back', pagamenti_path

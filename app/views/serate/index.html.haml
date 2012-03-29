@@ -1,0 +1,21 @@
+%h1 Listing serate
+
+%table
+  %tr
+    %th Titolo
+    %th Data
+    %th
+    %th
+    %th
+
+  - @serate.each do |serata|
+    %tr
+      %td= serata.titolo
+      %td= serata.data
+      %td= link_to 'Show', serata
+      %td= link_to 'Edit', edit_serata_path(serata)
+      %td= link_to 'Destroy', serata, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Serata', new_serata_path

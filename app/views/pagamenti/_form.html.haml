@@ -1,0 +1,19 @@
+= form_for @pagamento do |f|
+  -if @pagamento.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@pagamento.errors.count, "error")} prohibited this pagamento from being saved:"
+      %ul
+        - @pagamento.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :importo
+    = f.text_field :importo
+  .field
+    = f.label :dipendente_id
+    = f.number_field :dipendente_id
+  .field
+    = f.label :serata_id
+    = f.number_field :serata_id
+  .actions
+    = f.submit 'Save'

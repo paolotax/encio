@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Titolo:
+  = @serata.titolo
+%p
+  %b Data:
+  = @serata.data
+
+= link_to 'Edit', edit_serata_path(@serata)
+\|
+= link_to 'Back', serate_path

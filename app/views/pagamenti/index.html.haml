@@ -1,0 +1,23 @@
+%h1 Listing pagamenti
+
+%table
+  %tr
+    %th Importo
+    %th Dipendente
+    %th Serata
+    %th
+    %th
+    %th
+
+  - @pagamenti.each do |pagamento|
+    %tr
+      %td= pagamento.importo
+      %td= pagamento.dipendente_id
+      %td= pagamento.serata_id
+      %td= link_to 'Show', pagamento
+      %td= link_to 'Edit', edit_pagamento_path(pagamento)
+      %td= link_to 'Destroy', pagamento, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Pagamento', new_pagamento_path

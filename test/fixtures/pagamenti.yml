@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  importo: 9.99
+  dipendente_id: 1
+  serata_id: 1
+
+two:
+  importo: 9.99
+  dipendente_id: 1
+  serata_id: 1

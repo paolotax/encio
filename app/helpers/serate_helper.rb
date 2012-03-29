@@ -1,0 +1,2 @@
+module SerateHelper
+end

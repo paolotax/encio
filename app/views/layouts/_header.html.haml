@@ -1,0 +1,13 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => "/"}encio
+      .container.nav-collapse
+        %ul.nav
+          %li= link_to "Serate",     serate_url
+          %li= link_to "Dipendenti", dipendenti_url
+          %li= link_to "Ruoli",      ruoli_url

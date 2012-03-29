@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Nome:
+  = @dipendente.nome
+%p
+  %b Nome:
+  = @dipendente.nome
+%p
+  %b Ruolo:
+  = @dipendente.ruolo_id
+
+= link_to 'Edit', edit_dipendente_path(@dipendente)
+\|
+= link_to 'Back', dipendenti_path
