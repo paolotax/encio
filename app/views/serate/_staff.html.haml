@@ -1,0 +1,9 @@
+= simple_form_for @serata, :html => {:class => 'form-horizontal' } do |f|
+  %table.table.pagamenti
+    = f.simple_fields_for :pagamenti, :html => {:class => 'form-inline' } do |p|
+      %tr
+        %td= p.object.dipendente.nome
+        %td= p.number_field :importo, :onclick => 'this.focus();this.select()'
+  %hr    
+
+  = f.button :submit, 'Salva', class: "btn btn-warning btn-fullsize"

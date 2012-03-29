@@ -1,6 +1,5 @@
 class PagamentiController < ApplicationController
-  # GET /pagamenti
-  # GET /pagamenti.json
+
   def index
     @pagamenti = Pagamento.all
 

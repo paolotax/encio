@@ -1,12 +1,17 @@
-%p#notice= notice
+.well
+  .pull-right
+    = link_to serate_path, class: 'btn' do
+      tutte
+      
+  %h2= @serata.titolo
+  %p
+    = @serata.data
+  %hr
+  
 
-%p
-  %b Titolo:
-  = @serata.titolo
-%p
-  %b Data:
-  = @serata.data
+  = form_for @serata, html: { method: 'put', class: "crea-staff"} do |f|
+    = f.hidden_field :crea_staff, value: true
+    = f.submit "Crea Staff", class: 'btn btn-fullsize'
 
-= link_to 'Edit', edit_serata_path(@serata)
-\|
-= link_to 'Back', serate_path
+
+= render 'staff'

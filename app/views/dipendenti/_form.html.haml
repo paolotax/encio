@@ -1,4 +1,6 @@
-= simple_form_for @dipendente do |f| 
+= simple_form_for @dipendente, :html => {:class => 'form-horizontal' } do |f| 
   = f.input :nome
   = f.association :ruolo
-  = f.button :submit, 'Salva'
+  .control-group
+    .controls
+      = f.button :submit, 'Salva', class: "btn btn-primary btn-large"

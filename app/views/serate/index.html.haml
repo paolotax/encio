@@ -1,21 +1,26 @@
-%h1 Listing serate
+.pull-right
+  = link_to new_serata_path, class: "btn btn-primary" do
+    %i.icon-plus
+    Nuova serata
 
-%table
-  %tr
-    %th Titolo
-    %th Data
-    %th
-    %th
-    %th
 
-  - @serate.each do |serata|
+%h2 Serate
+
+%table.table
+  %thead
     %tr
-      %td= serata.titolo
-      %td= serata.data
-      %td= link_to 'Show', serata
-      %td= link_to 'Edit', edit_serata_path(serata)
-      %td= link_to 'Destroy', serata, :confirm => 'Are you sure?', :method => :delete
+      %th Titolo
+      %th Data
+      %th
+  %tbody
+    - @serate.each do |serata|
+      %tr
+        %td= link_to serata.titolo, serata
+        %td= serata.data
+        %td
+          .pull-right
+            = link_to edit_serata_path(serata), class: "btn btn-success" do
+              %i.icon-pencil
+            = link_to serata, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
+              %i.icon-minus
 
-%br
-
-= link_to 'New Serata', new_serata_path

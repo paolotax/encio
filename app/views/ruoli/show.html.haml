@@ -1,9 +1,15 @@
-%p#notice= notice
+.well
+  %h2= @ruolo.nome
+  %hr
 
-%p
-  %b Nome:
-  = @ruolo.nome
+  = link_to edit_ruolo_path(@ruolo), class: 'btn btn-success' do
+    %i.icon-pencil
+    Modifica
 
-= link_to 'Edit', edit_ruolo_path(@ruolo)
-\|
-= link_to 'Back', ruoli_path
+  = link_to 'tutti', ruoli_path, class: "btn"
+
+  = link_to @ruolo, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
+    %i.icon-minus
+    Elimina
+      
+  .clearfix

@@ -1,8 +1,7 @@
 class SerateController < ApplicationController
-  # GET /serate
-  # GET /serate.json
+
   def index
-    @serate = Serata.all
+    @serate = Serata.order("id desc").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,13 +9,14 @@ class SerateController < ApplicationController
     end
   end
 
-  # GET /serate/1
-  # GET /serate/1.json
-  def show
-    @serata = Serata.find(params[:id])
 
+  def show
+    @serata = Serata.includes(:pagamenti => [:dipendente]).find(params[:id])
+    @staff  = @serata.pagamenti
+    
     respond_to do |format|
       format.html # show.html.erb
+      format.xls
       format.json { render json: @serata }
     end
   end
@@ -32,19 +32,16 @@ class SerateController < ApplicationController
     end
   end
 
-  # GET /serate/1/edit
   def edit
     @serata = Serata.find(params[:id])
   end
 
-  # POST /serate
-  # POST /serate.json
   def create
     @serata = Serata.new(params[:serata])
 
     respond_to do |format|
       if @serata.save
-        format.html { redirect_to @serata, notice: 'Serata was successfully created.' }
+        format.html { redirect_to @serata, notice: 'Serata creata.' }
         format.json { render json: @serata, status: :created, location: @serata }
       else
         format.html { render action: "new" }
@@ -53,14 +50,12 @@ class SerateController < ApplicationController
     end
   end
 
-  # PUT /serate/1
-  # PUT /serate/1.json
   def update
     @serata = Serata.find(params[:id])
 
     respond_to do |format|
       if @serata.update_attributes(params[:serata])
-        format.html { redirect_to @serata, notice: 'Serata was successfully updated.' }
+        format.html { redirect_to @serata, notice: 'Serata modificata.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,8 +64,6 @@ class SerateController < ApplicationController
     end
   end
 
-  # DELETE /serate/1
-  # DELETE /serate/1.json
   def destroy
     @serata = Serata.find(params[:id])
     @serata.destroy

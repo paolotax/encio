@@ -1,15 +1,16 @@
-%p#notice= notice
+.well
+  %h2= @dipendente.nome
+  %p
+    = @dipendente.ruolo
+  %hr
+  
+  = link_to edit_dipendente_path(@dipendente), class: 'btn btn-success' do
+    %i.icon-pencil
+    Modifica
+  = link_to dipendenti_path, class: 'btn btn-sss' do
+    %i.icon-user
+    tutto lo Staff
+  = link_to @dipendente, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
+    %i.icon-minus
+    Elimina
 
-%p
-  %b Nome:
-  = @dipendente.nome
-%p
-  %b Nome:
-  = @dipendente.nome
-%p
-  %b Ruolo:
-  = @dipendente.ruolo_id
-
-= link_to 'Edit', edit_dipendente_path(@dipendente)
-\|
-= link_to 'Back', dipendenti_path

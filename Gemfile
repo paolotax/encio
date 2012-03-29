@@ -20,6 +20,7 @@ gem 'bootstrap-sass'
 gem "compass-rails", ">= 0.12"
 gem 'sass'
 gem "haml-rails"
+gem 'font-awesome-rails'
 
 gem 'jquery-rails'
 

@@ -1,6 +1,5 @@
 class RuoliController < ApplicationController
-  # GET /ruoli
-  # GET /ruoli.json
+
   def index
     @ruoli = Ruolo.all
 
@@ -10,8 +9,6 @@ class RuoliController < ApplicationController
     end
   end
 
-  # GET /ruoli/1
-  # GET /ruoli/1.json
   def show
     @ruolo = Ruolo.find(params[:id])
 
@@ -21,8 +18,6 @@ class RuoliController < ApplicationController
     end
   end
 
-  # GET /ruoli/new
-  # GET /ruoli/new.json
   def new
     @ruolo = Ruolo.new
 
@@ -32,19 +27,16 @@ class RuoliController < ApplicationController
     end
   end
 
-  # GET /ruoli/1/edit
   def edit
     @ruolo = Ruolo.find(params[:id])
   end
 
-  # POST /ruoli
-  # POST /ruoli.json
   def create
     @ruolo = Ruolo.new(params[:ruolo])
 
     respond_to do |format|
       if @ruolo.save
-        format.html { redirect_to @ruolo, notice: 'Ruolo was successfully created.' }
+        format.html { redirect_to ruoli_url, notice: 'Ruolo creato.' }
         format.json { render json: @ruolo, status: :created, location: @ruolo }
       else
         format.html { render action: "new" }
@@ -53,14 +45,12 @@ class RuoliController < ApplicationController
     end
   end
 
-  # PUT /ruoli/1
-  # PUT /ruoli/1.json
   def update
     @ruolo = Ruolo.find(params[:id])
 
     respond_to do |format|
       if @ruolo.update_attributes(params[:ruolo])
-        format.html { redirect_to @ruolo, notice: 'Ruolo was successfully updated.' }
+        format.html { redirect_to ruoli_url, notice: 'Ruolo modificato.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -69,8 +59,6 @@ class RuoliController < ApplicationController
     end
   end
 
-  # DELETE /ruoli/1
-  # DELETE /ruoli/1.json
   def destroy
     @ruolo = Ruolo.find(params[:id])
     @ruolo.destroy

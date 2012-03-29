@@ -1,29 +1,28 @@
-
 .pull-right
   = link_to new_dipendente_path, class: "btn btn-primary" do
     %i.icon-plus
-    Nuovo scagnozzo
+    Nuovo membro
 
-%h2 Tutti gli scagnozzi
+%h2 Tutti lo staff
 
 
 %table.table
-  %tr
-    %th Ruolo
-    %th Nome
-    %th
-
-
-  - @dipendenti.each do |dipendente|
+  %thead
     %tr
-      %td= link_to dipendente.ruolo, dipendente.ruolo
-      %td= link_to dipendente.nome, dipendente
-      %td
-        .pull-right
-          = link_to edit_dipendente_path(dipendente), class: "btn btn-success" do
-            %i.icon-pencil
-          = link_to dipendente, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do
-            %i.icon-minus
+      %th Ruolo
+      %th Nome
+      %th
+  %tbody
+    - @dipendenti.each do |dipendente|
+      %tr
+        %td= link_to dipendente.ruolo, dipendente.ruolo
+        %td= link_to dipendente.nome, dipendente
+        %td
+          .pull-right
+            = link_to edit_dipendente_path(dipendente), class: "btn btn-success" do
+              %i.icon-pencil
+            = link_to dipendente, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
+              %i.icon-minus
 
 
 

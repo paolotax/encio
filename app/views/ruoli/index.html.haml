@@ -1,19 +1,24 @@
-%h1 Listing ruoli
+.pull-right
+  = link_to new_ruolo_path, class: "btn btn-primary" do
+    %i.icon-plus
+    Nuovo ruolo
 
-%table
-  %tr
-    %th Nome
-    %th
-    %th
-    %th
+%h2 Ruoli
 
-  - @ruoli.each do |ruolo|
+
+%table.table
+  %thead
     %tr
-      %td= ruolo.nome
-      %td= link_to 'Show', ruolo
-      %td= link_to 'Edit', edit_ruolo_path(ruolo)
-      %td= link_to 'Destroy', ruolo, :confirm => 'Are you sure?', :method => :delete
+      %th Ruolo
+      %th
+  %tbody
+    - @ruoli.each do |ruolo|
+      %tr
+        %td= link_to ruolo.nome, ruolo
+        %td
+          .pull-right
+            = link_to edit_ruolo_path(ruolo), class: "btn btn-success" do
+              %i.icon-pencil
+            = link_to ruolo, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
+              %i.icon-minus
 
-%br
-
-= link_to 'New Ruolo', new_ruolo_path

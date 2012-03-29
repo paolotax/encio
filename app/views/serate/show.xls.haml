@@ -1,0 +1,11 @@
+%table
+  %tr
+    %th Ruolo
+    %th Staff member
+    %th Importo
+  = for s in @serata.pagamenti.all do
+    %tr
+      %td= s.dipendente.ruolo.nome
+      %td= s.dipendente.nome
+      %td= "#{s.importo.to_i},#{((s.importo - s.importo.to_i) * 100).to_i.to_s.ljust(2, '0')}" unless s.importo.nil?
+      
