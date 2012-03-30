@@ -1,7 +1,7 @@
 class RuoliController < ApplicationController
 
   def index
-    @ruoli = Ruolo.all
+    @ruoli = Ruolo.order(:id).all
 
     respond_to do |format|
       format.html # index.html.erb
