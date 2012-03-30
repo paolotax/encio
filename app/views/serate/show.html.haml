@@ -13,10 +13,26 @@
       = pretty_prezzo @staff.sum(:importo)
   %hr
   
-
   = form_for @serata, html: { method: 'put', class: "crea-staff"} do |f|
     = f.hidden_field :crea_staff, value: true
     = f.submit "Crea Staff", class: 'btn btn-fullsize'
 
+  
+%h3 Membri da pagare
+%table.table{style: "width: 100%"}
+  - for p in @serata.pagamenti.non_pagato do
+    %tr
+      %td= p.dipendente.ruolo.nome
+      %td= p.dipendente.nome
+      %td= link_to "paga", new_pagamento_path(serata: @serata, dipendente: p.dipendente), class: 'btn btn-success'
 
-= render 'staff'
+%h3 Membri pagati
+%table.table
+  - for p in @serata.pagamenti.pagato do
+    %tr
+      %td= p.dipendente.ruolo.nome
+      %td= p.dipendente.nome
+      %td= pretty_prezzo p.importo
+
+
+/ = render 'staff'

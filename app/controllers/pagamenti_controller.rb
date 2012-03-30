@@ -20,15 +20,10 @@ class PagamentiController < ApplicationController
     end
   end
 
-  # GET /pagamenti/new
-  # GET /pagamenti/new.json
   def new
-    @pagamento = Pagamento.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @pagamento }
-    end
+    @serata     = Serata.find(params[:serata])
+    @dipendente = Dipendente.find(params[:dipendente])
+    @pagamento  = @serata.pagamenti.build(dipendente: @dipendente)
   end
 
   # GET /pagamenti/1/edit

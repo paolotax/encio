@@ -1,19 +1,11 @@
-= form_for @pagamento do |f|
-  -if @pagamento.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@pagamento.errors.count, "error")} prohibited this pagamento from being saved:"
-      %ul
-        - @pagamento.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for @pagamento, :html => {:class => 'form-horizontal' } do |f|
+  = f.hidden_field :serata_id
+  = f.hidden_field :dipendente_id
+  
+  = f.input :importo
 
-  .field
-    = f.label :importo
-    = f.text_field :importo
-  .field
-    = f.label :dipendente_id
-    = f.number_field :dipendente_id
-  .field
-    = f.label :serata_id
-    = f.number_field :serata_id
-  .actions
-    = f.submit 'Save'
+  .control-group
+    .controls
+      = f.button :submit, 'Salva', class: "btn btn-primary btn-large"
+
+

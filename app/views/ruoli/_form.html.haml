@@ -1,5 +1,5 @@
 = simple_form_for @ruolo, :html => {:class => 'form-horizontal' } do |f| 
-  = f.input :nome, label: 'Ruolo'
+  = f.input :nome, label: 'Ruolo', :input_html => { :autofocus => true }
   %hr
   .control-group
     .controls
