@@ -9,8 +9,6 @@ class PagamentiController < ApplicationController
     end
   end
 
-  # GET /pagamenti/1
-  # GET /pagamenti/1.json
   def show
     @pagamento = Pagamento.find(params[:id])
 
@@ -26,19 +24,16 @@ class PagamentiController < ApplicationController
     @pagamento  = @serata.pagamenti.build(dipendente: @dipendente)
   end
 
-  # GET /pagamenti/1/edit
   def edit
     @pagamento = Pagamento.find(params[:id])
   end
 
-  # POST /pagamenti
-  # POST /pagamenti.json
   def create
     @pagamento = Pagamento.new(params[:pagamento])
 
     respond_to do |format|
       if @pagamento.save
-        format.html { redirect_to @pagamento, notice: 'Pagamento was successfully created.' }
+        format.html { redirect_to @pagamento.serata, notice: "Il baggiano e' stato pagato." }
         format.json { render json: @pagamento, status: :created, location: @pagamento }
       else
         format.html { render action: "new" }
@@ -47,8 +42,6 @@ class PagamentiController < ApplicationController
     end
   end
 
-  # PUT /pagamenti/1
-  # PUT /pagamenti/1.json
   def update
     @pagamento = Pagamento.find(params[:id])
 
@@ -70,7 +63,7 @@ class PagamentiController < ApplicationController
     @pagamento.destroy
 
     respond_to do |format|
-      format.html { redirect_to pagamenti_url }
+      format.html { redirect_to @pagamento.serata }
       format.json { head :no_content }
     end
   end

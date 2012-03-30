@@ -1,11 +1,20 @@
-= simple_form_for @pagamento, :html => {:class => 'form-horizontal' } do |f|
-  = f.hidden_field :serata_id
-  = f.hidden_field :dipendente_id
-  
-  = f.input :importo
+.well
 
-  .control-group
-    .controls
-      = f.button :submit, 'Salva', class: "btn btn-primary btn-large"
+  %h2
+    = @dipendente.nome
+    %small= @dipendente.ruolo.nome
+  %p
+    = @serata.titolo
+
+  = simple_form_for @pagamento, :html => {:class => 'form-horizontal' } do |f|
+    = f.hidden_field :serata_id
+    = f.hidden_field :dipendente_id
+  
+    = f.input :importo, :input_html => { :autofocus => true }
+
+    .control-group
+      .controls
+        = f.button :submit, 'Salva', class: "btn btn-primary btn-large"
+        = link_to "Indietro", @serata, class: "btn btn-large"
 
 
