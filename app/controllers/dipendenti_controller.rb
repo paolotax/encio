@@ -36,7 +36,7 @@ class DipendentiController < ApplicationController
 
     respond_to do |format|
       if @dipendente.save
-        format.html { redirect_to dipendenti_url, notice: 'Dipendente creato.' }
+        format.html { redirect_to Serata.last, notice: 'Dipendente creato.' }
         format.json { render json: @dipendente, status: :created, location: @dipendente }
       else
         format.html { render action: "new" }

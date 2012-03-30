@@ -1,6 +1,7 @@
 = simple_form_for @serata, :html => {:class => 'form-horizontal' } do |f|
   = f.input :titolo
   = f.input :data
+  = f.input :crea_staff, type: :checkbox
   .control-group
     .controls
       = f.button :submit, 'Salva', class: "btn btn-primary btn-large"

@@ -25,6 +25,8 @@ class PagamentiController < ApplicationController
   end
 
   def edit
+    # @dipendente = Dipendente.find(params[:dipendente])
+    #     @pagamento  = @serata.pagamenti.build(dipendente: @dipendente)
     @pagamento = Pagamento.find(params[:id])
   end
 
@@ -47,7 +49,7 @@ class PagamentiController < ApplicationController
 
     respond_to do |format|
       if @pagamento.update_attributes(params[:pagamento])
-        format.html { redirect_to @pagamento, notice: 'Pagamento was successfully updated.' }
+        format.html { redirect_to @pagamento.serata, notice: "Il baggiano e' stato pagato." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

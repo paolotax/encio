@@ -3,5 +3,10 @@ class Dipendente < ActiveRecord::Base
   has_many   :pagamenti
   has_many   :serate, :through => :pagamenti
   
+  attr_accessible :nome, :ruolo_id
+  
+  validates :nome,     :presence => true, :uniqueness => true
+  validates :ruolo_id, :presence => true
+  
   scope :per_ruolo, order(:ruolo_id)
 end

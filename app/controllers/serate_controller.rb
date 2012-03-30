@@ -11,8 +11,11 @@ class SerateController < ApplicationController
 
 
   def show
-    @serata = Serata.includes(:pagamenti => [:dipendente]).find(params[:id])
+    @serata = Serata.find(params[:id])
     @staff  = @serata.pagamenti
+    
+    @pagato = @serata.pagamenti.pagato
+    @non_pagato = @serata.dipendenti_non_pagati
     
     respond_to do |format|
       format.html # show.html.erb
@@ -21,8 +24,7 @@ class SerateController < ApplicationController
     end
   end
 
-  # GET /serate/new
-  # GET /serate/new.json
+
   def new
     @serata = Serata.new
 

@@ -2,43 +2,47 @@
 
 .well
   .pull-right
-    = link_to serate_path, class: 'btn' do
-      tutte
+    = link_to new_dipendente_path, class: 'btn btn-primary' do
+      %i.icon-plus
+      baggiano
       
-  %h2= @serata.titolo
+  %h2
+    = @serata.titolo
+    %small= @serata.data
+  
   %p
-    = @serata.data
-  %p
-    .badge
+    %span.badge
       = pretty_prezzo @staff.sum(:importo)
-  %hr
-  
-  = form_for @serata, html: { method: 'put', class: "crea-staff"} do |f|
-    = f.hidden_field :crea_staff, value: true
-    = f.submit "Aggiorna Staff", class: 'btn btn-fullsize'
 
-  
-%h2 Baggiani da pagare
+%h2 
+  Baggiani da pagare
+  %span.badge
+    = @non_pagato.size
 %table.table
-  - for p in @serata.pagamenti.non_pagato do
+  - for p in @non_pagato do
     %tr
-      %td= p.dipendente.ruolo.nome
-      %td= p.dipendente.nome
+      %td= p.ruolo.nome
+      %td= p.nome
       %td
-        .pull-right= link_to "paga", new_pagamento_path(serata: @serata, dipendente: p.dipendente), class: 'btn btn-success'
+        .pull-right
+          = link_to "paga", new_pagamento_path(serata: @serata, dipendente: p), class: 'btn btn-success'
 
-%h2 Baggiani pagati
+%h2 
+  Baggiani pagati
+  %span.badge
+    = @pagato.size
+    
 %table.table.pagamenti
-  - for p in @serata.pagamenti.pagato do
+  - for s in @pagato do
     %tr
-      %td= p.dipendente.ruolo.nome
-      %td= p.dipendente.nome
+      %td= s.dipendente.ruolo.nome
+      %td= s.dipendente.nome
       %td
         .pull-right
-          = pretty_prezzo p.importo
+          = pretty_prezzo s.importo
       %td
         .pull-right
-          = link_to p, :method => :delete, class: "btn btn-danger" do
+          = link_to s, :method => :delete, class: "btn btn-danger" do
             %i.icon-minus 
 
 
