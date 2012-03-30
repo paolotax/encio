@@ -12,7 +12,7 @@ class Serata < ActiveRecord::Base
   def dipendenti_non_pagati
     pagati = []
     self.pagamenti.pagato.each {|p| pagati << p.dipendente }
-    return Dipendente.all - pagati
+    return Dipendente.per_ruolo.all - pagati
   end
   
   def crea_staff=(staff)
