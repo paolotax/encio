@@ -15,10 +15,16 @@ form.crea-staff {
 table.pagamenti {
   width: 100%;
   td:first-child {
-    width: 80%;
+    width: 40%;
     font-size: 120%;
+    
   }
   td:nth-child(2) {
+    width: 40%;
+    font-size: 120%;
+    font-style: bold;
+  }
+  td:nth-child(3) {
     width: 20%;
     input {
       font-size: 120%;
