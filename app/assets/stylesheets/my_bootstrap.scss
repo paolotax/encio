@@ -28,6 +28,12 @@ table.pagamenti {
   }
 }
 
+a.btn-fullsize {
+  padding: 4px 0 4px 0;
+  font-size: 120%;
+  margin-right: 20px;
+  width: 100%;
+}
 input[type="button"].btn-fullsize,
 input[type="submit"].btn-fullsize {
   font-size: 120%;

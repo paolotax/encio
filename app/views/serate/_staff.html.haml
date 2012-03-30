@@ -5,5 +5,9 @@
         %td= p.object.dipendente.nome
         %td= p.number_field :importo, :onclick => 'this.focus();this.select()'
   %hr    
-
-  = f.button :submit, 'Salva', class: "btn btn-warning btn-fullsize"
+  
+  %p  
+    = f.button :submit, 'Salva', class: "btn btn-warning btn-fullsize"
+  %p
+    = link_to "Esporta xls", serata_path(@serata, format: 'xls'), class: "btn btn-fullsize"
+    

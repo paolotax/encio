@@ -1,3 +1,5 @@
+/ encoding: utf-8
+
 .well
   .pull-right
     = link_to serate_path, class: 'btn' do
@@ -6,6 +8,9 @@
   %h2= @serata.titolo
   %p
     = @serata.data
+  %p
+    .badge
+      = pretty_prezzo @staff.sum(:importo)
   %hr
   
 
