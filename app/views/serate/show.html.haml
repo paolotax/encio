@@ -1,24 +1,31 @@
 / encoding: utf-8
 
 .well
-  .pull-right
-    = link_to new_dipendente_path, class: 'btn btn-primary' do
-      %i.icon-plus
-      baggiano
+
       
   %h2
     = @serata.titolo
     %small= @serata.data
   
+  .pull-right
+    %label= pretty_prezzo @staff.sum(:importo), class: 'badge'
+  
   %p
-    %span.badge
-      = pretty_prezzo @staff.sum(:importo)
+    = link_to new_dipendente_path, class: 'btn btn-fullsize' do
+      aggiungi baggiano
 
+  %p
+    = link_to new_dipendente_path, class: 'btn btn-fullsize btn-warning' do
+      aggiungi prelievo cassa
+
+      
 %h2 
-  Baggiani da pagare
-  %span.badge
+  %span
     = @non_pagato.size
-%table.table
+  baggiani da pagare
+%br
+  
+%table.table.pagamenti
   - for p in @non_pagato do
     %tr
       %td= p.ruolo.nome
@@ -28,9 +35,10 @@
           = link_to "paga", new_pagamento_path(serata: @serata, dipendente: p), class: 'btn btn-success'
 
 %h2 
-  Baggiani pagati
   %span.badge
     = @pagato.size
+  baggiani pagati
+%br
     
 %table.table.pagamenti
   - for s in @pagato do
@@ -45,5 +53,7 @@
           = link_to s, :method => :delete, class: "btn btn-danger" do
             %i.icon-minus 
 
-
+.well
+  = link_to "Esporta xls", serata_path(@serata, format: 'xls'), class: "btn btn-fullsize"
+  
 / = render 'staff'
