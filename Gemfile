@@ -24,6 +24,8 @@ gem 'sass'
 gem "haml-rails"
 gem 'font-awesome-rails'
 
+gem 'knockoutjs-rails'
+
 gem 'jquery-rails'
 
 group :production do

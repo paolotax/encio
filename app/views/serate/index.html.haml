@@ -1,3 +1,32 @@
+
+%h2 Serate
+
+%table.table
+  %thead
+    %tr
+      %th Titolo
+      %th Data
+      %th
+  %tbody{ data: { bind: "foreach: serate, visible: serate().length > 0" }} 
+    %tr
+      %td
+        %span{ data: { bind: "text: titolo"}}
+      %td
+        %span{ data: { bind: "text: data"}}
+      %td
+        .pull-right
+          %a{ href: '#',  data: { bind: 'click: $root.removeSerata' }, class: "btn btn-danger" }
+            %i.icon-minus
+        
+        / .pull-right
+        /   = link_to edit_serata_path(serata), class: "btn btn-success" do
+        /     %i.icon-pencil
+        /   = link_to serata, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
+        /     %i.icon-minus
+
+
+
+
 .pull-right
   = link_to new_serata_path, class: "btn btn-primary" do
     %i.icon-plus
@@ -24,3 +53,27 @@
             = link_to serata, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
               %i.icon-minus
 
+:javascript
+  
+  function Serata(data) {
+    this.titolo = ko.observable(data.titolo);
+    this.data   = ko.observable(data.data);
+  }
+
+  function SerataListViewModel() {
+    // Data
+    var self = this;
+    self.serate = ko.observableArray([]);
+
+    // Load initial state from server, convert it to Task instances, then populate self.tasks
+    $.getJSON("/serate", function(allData) {
+        var mappedTasks = $.map(allData, function(item) { return new Serata(item) });
+        self.serate(mappedTasks);
+    });
+    
+    self.removeSerata = function(serata) {
+      self.serate.remove(serata);
+    }
+  }
+
+  ko.applyBindings(new SerataListViewModel());
