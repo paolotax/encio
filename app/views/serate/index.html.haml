@@ -1,30 +1,35 @@
+%div{ data: { bind: "with: listSerate"} }
+  %h2 Serate
 
-%h2 Serate
-
-%table.table
-  %thead
-    %tr
-      %th Titolo
-      %th Data
-      %th
-  %tbody{ data: { bind: "foreach: serate, visible: serate().length > 0" }} 
-    %tr
-      %td
-        %span{ data: { bind: "text: titolo"}}
-      %td
-        %span{ data: { bind: "text: data"}}
-      %td
-        .pull-right
-          %a{ href: '#',  data: { bind: 'click: $root.removeSerata' }, class: "btn btn-danger" }
-            %i.icon-minus
+  %table.table
+    %thead
+      %tr
+        %th Titolo
+        %th Data
+        %th
+    %tbody{ data: { bind: "foreach: serate, visible: serate().length > 0" }} 
+      %tr{ data: { bind: "click: $root.goToSerata"}}
+        %td
+          %span{ data: { bind: "text: titolo"}}
+        %td
+          %span{ data: { bind: "text: data"}}
+        %td
+          .pull-right
+            %a{ href: '#',  data: { bind: 'click: $root.removeSerata' }, class: "btn btn-danger" }
+              %i.icon-minus
         
-        / .pull-right
-        /   = link_to edit_serata_path(serata), class: "btn btn-success" do
-        /     %i.icon-pencil
-        /   = link_to serata, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
-        /     %i.icon-minus
+          / .pull-right
+          /   = link_to edit_serata_path(serata), class: "btn btn-success" do
+          /     %i.icon-pencil
+          /   = link_to serata, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
+          /     %i.icon-minus
 
-
+%div{ data: { bind: "with: editForm" }}
+  %form{ data: { bind: "submit: $root.saveSerata"}}
+    %input{ data: { bind: "value: titolo"}}
+    %input{ data: { bind: "value: data"}}
+    %button{ type: "submit" }
+      Salva
 
 
 .pull-right
@@ -53,6 +58,10 @@
             = link_to serata, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
               %i.icon-minus
 
+
+
+
+
 :javascript
   
   function Serata(data) {
@@ -63,12 +72,25 @@
   function SerataListViewModel() {
     // Data
     var self = this;
-    self.serate = ko.observableArray([]);
-
+    
+    self.serate      = ko.observableArray([]);
+    self.listSerate  = ko.observable();
+    self.editForm    = ko.observable();
+    
+    self.goToSerata = function(serata) {
+      self.listSerate(null);
+      self.editForm(serata);
+    }
+    
+    self.saveSerata = function() {
+      console.log("ciao");
+      self.listSerate(self.serate());
+      self.editForm(null);
+    }
     // Load initial state from server, convert it to Task instances, then populate self.tasks
     $.getJSON("/serate", function(allData) {
         var mappedTasks = $.map(allData, function(item) { return new Serata(item) });
-        self.serate(mappedTasks);
+        self.listSerate(self.serate(mappedTasks));
     });
     
     self.removeSerata = function(serata) {
