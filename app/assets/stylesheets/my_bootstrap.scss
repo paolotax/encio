@@ -39,6 +39,9 @@ a.btn-fullsize {
   margin-right: 20px;
   width: 100%;
 }
+
+button[type="button"].btn-fullsize,
+button[type="submit"].btn-fullsize,
 input[type="button"].btn-fullsize,
 input[type="submit"].btn-fullsize {
   font-size: 120%;
