@@ -1,54 +1,54 @@
-%div{ data: { bind: "with: listSerate"} }
-  %h2 Serate
-
-  %table.table
-    %thead
-      %tr
-        %th Titolo
-        %th Data
-        %th
-    %tbody{ data: { bind: "foreach: serate, visible: serate().length > 0" }} 
-      %tr{ data: { bind: "click: $root.goToSerata"}}
-        %td
-          %span{ data: { bind: "text: titolo"}}
-        %td
-          %span{ data: { bind: "text: data"}}
-        %td
-          .pull-right
-            %a{ href: '#',  data: { bind: 'click: $root.removeSerata, clickBubble: false' }, class: "btn btn-danger" }
-              %i.icon-minus
-        
-          / .pull-right
-          /   = link_to edit_serata_path(serata), class: "btn btn-success" do
-          /     %i.icon-pencil
-          /   = link_to serata, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
-          /     %i.icon-minus
-
-%div{ data: { bind: "with: editForm" }}
-  .well
-    %h2 Modifica Serata
-    %hr
-    %form{ class: "simple_form form-horizontal", data: { bind: "submit: $root.saveSerata"} }
-      .control-group
-        %label.control-label
-          Titolo
-        .controls
-          %input{ data: { bind: "value: titolo"}}
-      .control-group
-        %label.control-label
-          Data
-        .controls
-          %input{ data: { bind: "value: data"}}
-      %hr
-
-      %button{ type: "submit", class: "btn btn-primary btn-fullsize" }
-        Salva
-      
-      %br
-        
-      %a{ href: '#',  data: { bind: 'click: $root.cancelSerata' }, class: "btn btn-fullsize" }
-        Annulla
-
+/ %div{ data: { bind: "with: listSerate"} }
+/   %h2 Serate
+/ 
+/   %table.table
+/     %thead
+/       %tr
+/         %th Titolo
+/         %th Data
+/         %th
+/     %tbody{ data: { bind: "foreach: serate, visible: serate().length > 0" }} 
+/       %tr{ data: { bind: "click: $root.goToSerata"}}
+/         %td
+/           %span{ data: { bind: "text: titolo"}}
+/         %td
+/           %span{ data: { bind: "text: data"}}
+/         %td
+/           .pull-right
+/             %a{ href: '#',  data: { bind: 'click: $root.removeSerata, clickBubble: false' }, class: "btn btn-danger" }
+/               %i.icon-minus
+/         
+/           / .pull-right
+/           /   = link_to edit_serata_path(serata), class: "btn btn-success" do
+/           /     %i.icon-pencil
+/           /   = link_to serata, :confirm => 'Sei sicuro?', :method => :delete, class: "btn btn-danger" do
+/           /     %i.icon-minus
+/ 
+/ %div{ data: { bind: "with: editForm" }}
+/   .well
+/     %h2 Modifica Serata
+/     %hr
+/     %form{ class: "simple_form form-horizontal", data: { bind: "submit: $root.saveSerata"} }
+/       .control-group
+/         %label.control-label
+/           Titolo
+/         .controls
+/           %input{ data: { bind: "value: titolo"}}
+/       .control-group
+/         %label.control-label
+/           Data
+/         .controls
+/           %input{ data: { bind: "value: data"}}
+/       %hr
+/ 
+/       %button{ type: "submit", class: "btn btn-primary btn-fullsize" }
+/         Salva
+/       
+/       %br
+/         
+/       %a{ href: '#',  data: { bind: 'click: $root.cancelSerata' }, class: "btn btn-fullsize" }
+/         Annulla
+/ 
 .pull-right
   = link_to new_serata_path, class: "btn btn-primary" do
     %i.icon-plus
@@ -79,94 +79,94 @@
 
 
 
-:javascript
-  
-  //wrapper to an observable that requires accept/cancel
-  ko.protectedObservable = function(initialValue) {
-      //private variables
-      var _actualValue = ko.observable(initialValue);
-      var _tempValue = initialValue;
-      
-      //dependentObservable that we will return
-      var result = ko.dependentObservable({
-          //always return the actual value
-          read: function() {
-             return _actualValue(); 
-          },
-          //stored in a temporary spot until commit
-          write: function(newValue) {
-               _tempValue = newValue; 
-          }
-      }); 
-      
-      //if different, commit temp value
-      result.commit = function() {
-          if (_tempValue !== _actualValue()) {
-               _actualValue(_tempValue); 
-          }  
-      };
-      
-      //force subscribers to take original
-      result.reset = function() {
-          _actualValue.valueHasMutated();
-          _tempValue = _actualValue();   //reset temp value 
-      };
-   
-      return result;
-  };
-
-
-  function Serata(data) {
-    this.titolo = ko.protectedObservable(data.titolo);
-    this.data   = ko.protectedObservable(data.data);
-  }
-
-  function SerataListViewModel() {
-
-    var self = this;
-    
-    var mappedTasks
-    
-    self.serate      = ko.observableArray([]);
-    self.listSerate  = ko.observable();
-    self.editForm    = ko.observable();
-    self.selectedItem = ko.observable();
-    
-    
-    self.goToSerata = function(serata) {
-      self.selectedItem(serata);
-      self.listSerate(null);
-      self.editForm(serata);
-    }
-    
-    self.saveSerata = function(serata) {
-
-      self.selectedItem().data.commit();
-      self.selectedItem().titolo.commit();
-
-      self.listSerate(self.serate(mappedTasks));
-      self.editForm(null);
-    }
-    
-    self.cancelSerata = function() {
-
-      self.selectedItem().data.reset();
-      self.selectedItem().titolo.reset();      
-
-      self.listSerate(self.serate(mappedTasks));
-      self.editForm(null);
-    }
-    
-    self.removeSerata = function(serata) {
-      if (confirm("Sei sicuro?")) {
-        self.serate.remove(serata);
-      }
-    }
-    
-    $.getJSON("/serate", function(allData) {
-      mappedTasks = $.map(allData, function(item) { return new Serata(item) });
-      self.listSerate(self.serate(mappedTasks));
-    });
-  }
-
-  ko.applyBindings(new SerataListViewModel());
+/ :javascript
+/   
+/   //wrapper to an observable that requires accept/cancel
+/   ko.protectedObservable = function(initialValue) {
+/       //private variables
+/       var _actualValue = ko.observable(initialValue);
+/       var _tempValue = initialValue;
+/       
+/       //dependentObservable that we will return
+/       var result = ko.dependentObservable({
+/           //always return the actual value
+/           read: function() {
+/              return _actualValue(); 
+/           },
+/           //stored in a temporary spot until commit
+/           write: function(newValue) {
+/                _tempValue = newValue; 
+/           }
+/       }); 
+/       
+/       //if different, commit temp value
+/       result.commit = function() {
+/           if (_tempValue !== _actualValue()) {
+/                _actualValue(_tempValue); 
+/           }  
+/       };
+/       
+/       //force subscribers to take original
+/       result.reset = function() {
+/           _actualValue.valueHasMutated();
+/           _tempValue = _actualValue();   //reset temp value 
+/       };
+/    
+/       return result;
+/   };
+/ 
+/ 
+/   function Serata(data) {
+/     this.titolo = ko.protectedObservable(data.titolo);
+/     this.data   = ko.protectedObservable(data.data);
+/   }
+/ 
+/   function SerataListViewModel() {
+/ 
+/     var self = this;
+/     
+/     var mappedTasks
+/     
+/     self.serate      = ko.observableArray([]);
+/     self.listSerate  = ko.observable();
+/     self.editForm    = ko.observable();
+/     self.selectedItem = ko.observable();
+/     
+/     
+/     self.goToSerata = function(serata) {
+/       self.selectedItem(serata);
+/       self.listSerate(null);
+/       self.editForm(serata);
+/     }
+/     
+/     self.saveSerata = function(serata) {
+/ 
+/       self.selectedItem().data.commit();
+/       self.selectedItem().titolo.commit();
+/ 
+/       self.listSerate(self.serate(mappedTasks));
+/       self.editForm(null);
+/     }
+/     
+/     self.cancelSerata = function() {
+/ 
+/       self.selectedItem().data.reset();
+/       self.selectedItem().titolo.reset();      
+/ 
+/       self.listSerate(self.serate(mappedTasks));
+/       self.editForm(null);
+/     }
+/     
+/     self.removeSerata = function(serata) {
+/       if (confirm("Sei sicuro?")) {
+/         self.serate.remove(serata);
+/       }
+/     }
+/     
+/     $.getJSON("/serate", function(allData) {
+/       mappedTasks = $.map(allData, function(item) { return new Serata(item) });
+/       self.listSerate(self.serate(mappedTasks));
+/     });
+/   }
+/ 
+/   ko.applyBindings(new SerataListViewModel());
