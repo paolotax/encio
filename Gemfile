@@ -24,7 +24,9 @@ gem 'sass'
 gem "haml-rails"
 gem 'font-awesome-rails'
 
-gem 'knockoutjs-rails'
+#gem 'knockoutjs-rails'
+
+gem "turbolinks"
 
 gem 'jquery-rails'
 
