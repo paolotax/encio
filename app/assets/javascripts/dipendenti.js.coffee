@@ -3,7 +3,4 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
-document.addEventListener 'page:change', ->
-  $('.dropdown-toggle').dropdown()
-  $(".nav-collapse").collapse "hide"
     

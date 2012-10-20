@@ -136,7 +136,6 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (0.1.5)
     turn (0.9.4)
       ansi
     tzinfo (0.3.32)
@@ -167,7 +166,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.4)
   simple_form
   sqlite3
-  turbolinks
   turn
   uglifier (>= 1.0.3)
   unicorn

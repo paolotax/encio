@@ -26,7 +26,8 @@ gem 'font-awesome-rails'
 
 #gem 'knockoutjs-rails'
 
-gem "turbolinks"
+# gem "turbolinks"
+# gem 'jquery-turbolinks'
 
 gem 'jquery-rails'
 
